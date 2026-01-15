@@ -1,0 +1,48 @@
+﻿@page
+@model Management_Atelier_Reparatii.Pages.Mecanici.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Mecanic[0].Nume)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mecanic[0].Specializare)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mecanic[0].Telefon)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Mecanic) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nume)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Specializare)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefon)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.MecanicId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.MecanicId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.MecanicId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

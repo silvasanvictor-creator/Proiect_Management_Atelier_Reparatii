@@ -1,0 +1,56 @@
+﻿@page
+@model Management_Atelier_Reparatii.Pages.ComenziService.CreateModel
+
+        @{
+        ViewData["Title"] = "Create";
+        }
+        
+        <h1>Create</h1>
+        
+    <h4>ComandaService</h4>
+    <hr />
+    <div class="row">
+    <div class="col-md-4">
+    <form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ComandaService.MasinaId" class="control-label"></label>
+                <select asp-for="ComandaService.MasinaId" class ="form-control" asp-items="ViewBag.BicicletaId" aria-required="true"></select>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ComandaService.MecanicId" class="control-label"></label>
+                <select asp-for="ComandaService.MecanicId" class ="form-control" asp-items="ViewBag.MecanicId" aria-required="true"></select>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ComandaService.DataPrimire" class="control-label"></label>
+                <input asp-for="ComandaService.DataPrimire" class="form-control" aria-required="true"/>
+                <span asp-validation-for="ComandaService.DataPrimire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ComandaService.Status" class="control-label"></label>
+                <select asp-for="ComandaService.Status" class="form-control" aria-required="true"></select>
+                <span asp-validation-for="ComandaService.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ComandaService.Observatii" class="control-label"></label>
+                <input asp-for="ComandaService.Observatii" class="form-control" />
+                <span asp-validation-for="ComandaService.Observatii" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

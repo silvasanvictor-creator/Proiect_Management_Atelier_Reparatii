@@ -1,0 +1,60 @@
+﻿@page
+@model Management_Atelier_Reparatii.Pages.ComenziService.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ComandaService[0].Masina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComandaService[0].Mecanic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComandaService[0].DataPrimire)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComandaService[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComandaService[0].Observatii)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ComandaService) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Masina.MasinaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mecanic.MecanicId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPrimire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observatii)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ComandaServiceId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ComandaServiceId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ComandaServiceId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
