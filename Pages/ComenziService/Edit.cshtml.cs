@@ -36,8 +36,24 @@ namespace Management_Atelier_Reparatii.Pages.ComenziService
                 return NotFound();
             }
             ComandaService = comandaservice;
-           ViewData["MasinaId"] = new SelectList(_context.Set<Masina>(), "MasinaId", "MasinaId");
-           ViewData["MecanicId"] = new SelectList(_context.Set<Mecanic>(), "MecanicId", "MecanicId");
+           ViewData["MasinaId"] = new SelectList(_context.Set<Masina>(), "MasinaId", "NumarInmatriculare");
+           ViewData["MecanicId"] = new SelectList(_context.Set<Mecanic>(), "MecanicId", "Nume");
+
+            var masiniOcupate = _context.ComandaService
+    .Where(c => c.Status == StatusComanda.Nou || c.Status == StatusComanda.InLucru || c.Status == StatusComanda.Finalizat)
+    .Select(c => c.MasinaId)
+    .ToList();
+
+            var masiniDisponibile = _context.Masina
+                .Where(m => !masiniOcupate.Contains(m.MasinaId))
+                .ToList();
+
+            ViewData["MasinaId"] = new SelectList(
+                masiniDisponibile,
+                "MasinaId",
+                "NumarInmatriculare"
+            );
+
             return Page();
         }
 

@@ -1,4 +1,5 @@
 ﻿@page
+@using Management_Atelier_Reparatii.Models
 @model Management_Atelier_Reparatii.Pages.ComenziService.EditModel
 
 @{
@@ -35,7 +36,7 @@
             <div class="form-group">
 <span class="text-danger">*</span>
                 <label asp-for="ComandaService.Status" class="control-label"></label>
-                <select asp-for="ComandaService.Status" class="form-control" aria-required="true"></select>
+                <select asp-for="ComandaService.Status" class="form-control" aria-required="true" asp-items="Html.GetEnumSelectList<StatusComanda>()"></select>
                 <span asp-validation-for="ComandaService.Status" class="text-danger"></span>
             </div>
             <div class="form-group">

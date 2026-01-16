@@ -1,5 +1,6 @@
 ﻿@page
 @model Management_Atelier_Reparatii.Pages.ComenziService.IndexModel
+@using Management_Atelier_Reparatii.Models
 
 @{
     ViewData["Title"] = "Index";
@@ -35,17 +36,32 @@
 @foreach (var item in Model.ComandaService) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Masina.MasinaId)
+                @Html.DisplayFor(modelItem => item.Masina.NumarInmatriculare)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Mecanic.MecanicId)
+                @Html.DisplayFor(modelItem => item.Mecanic.Nume)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataPrimire)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
+                    @if (item.Status == StatusComanda.Nou)
+                    {
+                        <span class="badge bg-secondary">Noua</span>
+                    }
+                    else if (item.Status == StatusComanda.InLucru)
+                    {
+                        <span class="badge bg-warning text-dark">In lucru</span>
+                    }
+                    else if (item.Status == StatusComanda.Finalizat)
+                    {
+                        <span class="badge bg-success">Finalizata</span>
+                    }
+                    else if (item.Status == StatusComanda.Predat)
+                    {
+                        <span class="badge bg-primary">Predată</span>
+                    }
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Observatii)
             </td>

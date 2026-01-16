@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Management_Atelier_Reparatii.Migrations
 {
     [DbContext(typeof(Management_Atelier_ReparatiiContext))]
-    [Migration("20260115201630_InitialCreate")]
+    [Migration("20260116083003_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -37,6 +37,7 @@ namespace Management_Atelier_Reparatii.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nume")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefon")
@@ -55,11 +56,11 @@ namespace Management_Atelier_Reparatii.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ComandaServiceId"));
 
-                    b.Property<int>("BicicletaId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DataPrimire")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("MasinaId")
+                        .HasColumnType("int");
 
                     b.Property<int>("MecanicId")
                         .HasColumnType("int");
@@ -73,7 +74,7 @@ namespace Management_Atelier_Reparatii.Migrations
 
                     b.HasKey("ComandaServiceId");
 
-                    b.HasIndex("BicicletaId");
+                    b.HasIndex("MasinaId");
 
                     b.HasIndex("MecanicId");
 
@@ -129,6 +130,7 @@ namespace Management_Atelier_Reparatii.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefon")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MecanicId");
@@ -138,9 +140,9 @@ namespace Management_Atelier_Reparatii.Migrations
 
             modelBuilder.Entity("Management_Atelier_Reparatii.Models.ComandaService", b =>
                 {
-                    b.HasOne("Management_Atelier_Reparatii.Models.Masina", "Bicicleta")
+                    b.HasOne("Management_Atelier_Reparatii.Models.Masina", "Masina")
                         .WithMany("ComenziService")
-                        .HasForeignKey("BicicletaId")
+                        .HasForeignKey("MasinaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -150,7 +152,7 @@ namespace Management_Atelier_Reparatii.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Bicicleta");
+                    b.Navigation("Masina");
 
                     b.Navigation("Mecanic");
                 });

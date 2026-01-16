@@ -17,7 +17,7 @@ namespace Management_Atelier_Reparatii.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nume = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nume = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefon = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -34,7 +34,7 @@ namespace Management_Atelier_Reparatii.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Specializare = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Telefon = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Telefon = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,7 +70,7 @@ namespace Management_Atelier_Reparatii.Migrations
                 {
                     ComandaServiceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BicicletaId = table.Column<int>(type: "int", nullable: false),
+                    MasinaId = table.Column<int>(type: "int", nullable: false),
                     MecanicId = table.Column<int>(type: "int", nullable: false),
                     DataPrimire = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
@@ -80,8 +80,8 @@ namespace Management_Atelier_Reparatii.Migrations
                 {
                     table.PrimaryKey("PK_ComandaService", x => x.ComandaServiceId);
                     table.ForeignKey(
-                        name: "FK_ComandaService_Masina_BicicletaId",
-                        column: x => x.BicicletaId,
+                        name: "FK_ComandaService_Masina_MasinaId",
+                        column: x => x.MasinaId,
                         principalTable: "Masina",
                         principalColumn: "MasinaId",
                         onDelete: ReferentialAction.Cascade);
@@ -94,9 +94,9 @@ namespace Management_Atelier_Reparatii.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ComandaService_BicicletaId",
+                name: "IX_ComandaService_MasinaId",
                 table: "ComandaService",
-                column: "BicicletaId");
+                column: "MasinaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ComandaService_MecanicId",

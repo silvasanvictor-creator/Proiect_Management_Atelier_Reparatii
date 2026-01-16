@@ -1,4 +1,5 @@
 ﻿@page
+@using Management_Atelier_Reparatii.Models
 @model Management_Atelier_Reparatii.Pages.ComenziService.CreateModel
 
         @{
@@ -16,12 +17,16 @@
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="ComandaService.MasinaId" class="control-label"></label>
-                <select asp-for="ComandaService.MasinaId" class ="form-control" asp-items="ViewBag.BicicletaId" aria-required="true"></select>
+                <select asp-for="ComandaService.MasinaId" class ="form-control" asp-items="ViewBag.MasinaId" aria-required="true">
+                    <option value="">-- Selecteaza Masina --</option>
+                </select>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="ComandaService.MecanicId" class="control-label"></label>
-                <select asp-for="ComandaService.MecanicId" class ="form-control" asp-items="ViewBag.MecanicId" aria-required="true"></select>
+                <select asp-for="ComandaService.MecanicId" class ="form-control" asp-items="ViewBag.MecanicId" aria-required="true">
+                    <option value="">-- Selecteaza Mecanic --</option>
+                </select>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
@@ -32,7 +37,9 @@
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="ComandaService.Status" class="control-label"></label>
-                <select asp-for="ComandaService.Status" class="form-control" aria-required="true"></select>
+                <select asp-for="ComandaService.Status" class="form-control" aria-required="true" asp-items="Html.GetEnumSelectList<StatusComanda>()">
+                    <option value="">-- Selecteaza Status --</option>
+                </select>
                 <span asp-validation-for="ComandaService.Status" class="text-danger"></span>
             </div>
             <div class="form-group">
