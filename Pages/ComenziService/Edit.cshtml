@@ -33,12 +33,7 @@
                 <input asp-for="ComandaService.DataPrimire" class="form-control" aria-required="true"/>
                 <span asp-validation-for="ComandaService.DataPrimire" class="text-danger"></span>
             </div>
-            <div class="form-group">
-<span class="text-danger">*</span>
-                <label asp-for="ComandaService.Status" class="control-label"></label>
-                <select asp-for="ComandaService.Status" class="form-control" aria-required="true" asp-items="Html.GetEnumSelectList<StatusComanda>()"></select>
-                <span asp-validation-for="ComandaService.Status" class="text-danger"></span>
-            </div>
+            @* Status is managed from the Index page; hide it here to prevent editing status via Edit form *@
             <div class="form-group">
                 <label asp-for="ComandaService.Observatii" class="control-label"></label>
                 <input asp-for="ComandaService.Observatii" class="form-control" />

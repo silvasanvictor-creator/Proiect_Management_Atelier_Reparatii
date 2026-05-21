@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +12,8 @@ using Management_Atelier_Reparatii.Models;
 
 namespace Management_Atelier_Reparatii.Pages.ComenziService
 {
+    [Authorize(Roles = "Admin,Mecanic")]
+    // Edit page model for ComenziService
     public class EditModel : PageModel
     {
         private readonly Management_Atelier_Reparatii.Data.Management_Atelier_ReparatiiContext _context;
@@ -61,6 +64,12 @@ namespace Management_Atelier_Reparatii.Pages.ComenziService
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            // Extra server-side check to ensure only Admin or Mecanic can perform the update
+            if (!User.IsInRole("Admin") && !User.IsInRole("Mecanic"))
+            {
+                return Forbid();
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();

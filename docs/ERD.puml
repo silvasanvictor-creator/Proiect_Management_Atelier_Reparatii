@@ -1,0 +1,46 @@
+@startuml
+' Database ERD for Management_Atelier_Reparatii
+' Render with PlantUML (https://plantuml.com)
+
+entity "Client" as Client {
+  * Id : int
+  --
+  Nume : string
+  Telefon : string
+  Email : string
+}
+
+entity "Masina" as Masina {
+  * MasinaId : int
+  --
+  ClientId : int
+  Marca : string
+  Model : string
+  AnFabricatie : string
+  NumarInmatriculare : string
+}
+
+entity "Mecanic" as Mecanic {
+  * MecanicId : int
+  --
+  Nume : string
+  Specializare : string
+  Telefon : string
+}
+
+entity "ComandaService" as ComandaService {
+  * ComandaServiceId : int
+  --
+  MasinaId : int
+  MecanicId : int
+  DataPrimire : DateTime
+  Status : StatusComanda
+  Observatii : string
+}
+
+' Relationships
+Client ||--o{ Masina : "owns"
+Masina ||--o{ ComandaService : "has"
+Mecanic ||--o{ ComandaService : "handles"
+
+@enduml

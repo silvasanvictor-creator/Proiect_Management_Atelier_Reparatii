@@ -10,6 +10,9 @@ using Management_Atelier_Reparatii.Models;
 
 namespace Management_Atelier_Reparatii.Pages.Clienti
 {
+    using Microsoft.AspNetCore.Authorization;
+
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         private readonly Management_Atelier_Reparatii.Data.Management_Atelier_ReparatiiContext _context;

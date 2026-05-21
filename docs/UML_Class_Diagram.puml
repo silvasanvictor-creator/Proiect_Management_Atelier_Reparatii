@@ -1,0 +1,43 @@
+@startuml
+' UML class diagram for Management_Atelier_Reparatii (simplified)
+
+class Client {
+  +int Id
+  +string Nume
+  +string Telefon
+  +string Email
+  +ICollection<Masina> Masini
+}
+
+class Masina {
+  +int MasinaId
+  +int ClientId
+  +string Marca
+  +string Model
+  +string AnFabricatie
+  +string NumarInmatriculare
+  +ICollection<ComandaService> ComenziService
+}
+
+class Mecanic {
+  +int MecanicId
+  +string Nume
+  +string Specializare
+  +string Telefon
+  +ICollection<ComandaService> ComenziService
+}
+
+class ComandaService {
+  +int ComandaServiceId
+  +int MasinaId
+  +int MecanicId
+  +DateTime DataPrimire
+  +StatusComanda Status
+  +string Observatii
+}
+
+Client "1" -- "*" Masina : owns
+Masina "1" -- "*" ComandaService : has
+Mecanic "1" -- "*" ComandaService : handles
+
+@enduml

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Management_Atelier_Reparatii.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Management_Atelier_Reparatii.Data
 {
-    public class Management_Atelier_ReparatiiContext : DbContext
+    public class Management_Atelier_ReparatiiContext : IdentityDbContext<IdentityUser>
     {
         public Management_Atelier_ReparatiiContext (DbContextOptions<Management_Atelier_ReparatiiContext> options)
             : base(options)

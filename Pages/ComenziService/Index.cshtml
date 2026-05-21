@@ -6,11 +6,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+@* Only allow creating comenzi to Admins and Mechanics *@
+@if (User.IsInRole("Admin") || User.IsInRole("Mecanic"))
+{
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -66,9 +69,42 @@
                 @Html.DisplayFor(modelItem => item.Observatii)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ComandaServiceId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ComandaServiceId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ComandaServiceId">Delete</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-page="./Edit" asp-route-id="@item.ComandaServiceId">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@item.ComandaServiceId">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@item.ComandaServiceId">Delete</a>
+
+                    @* Inline server form to change status. Posts back to OnPostChangeStatusAsync *@
+                    <form method="post" asp-page-handler="ChangeStatus" asp-route-id="@item.ComandaServiceId" class="d-inline">
+                        <select name="newStatus" class="form-select form-select-sm d-inline w-auto">
+                            <option value="" disabled>Selecteaza status comanda</option>
+                            <option value="0" selected="@(item.Status == StatusComanda.Nou)">Noua</option>
+                            <option value="1" selected="@(item.Status == StatusComanda.InLucru)">In lucru</option>
+                            <option value="2" selected="@(item.Status == StatusComanda.Finalizat)">Finalizata</option>
+                            <option value="3" selected="@(item.Status == StatusComanda.Predat)">Predată</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-primary ms-1">Update</button>
+                    </form>
+                }
+                else if (User.IsInRole("Mecanic"))
+                {
+                    // Mecanic can edit, view details, and change status but not delete
+                    <a asp-page="./Edit" asp-route-id="@item.ComandaServiceId">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@item.ComandaServiceId">Details</a>
+
+                    @* Inline server form to change status for Mecanic as well *@
+                    <form method="post" asp-page-handler="ChangeStatus" asp-route-id="@item.ComandaServiceId" class="d-inline">
+                        <select name="newStatus" class="form-select form-select-sm d-inline w-auto">
+                            <option value="" disabled>Selecteaza status comanda</option>
+                            <option value="0" selected="@(item.Status == StatusComanda.Nou)">Noua</option>
+                            <option value="1" selected="@(item.Status == StatusComanda.InLucru)">In lucru</option>
+                            <option value="2" selected="@(item.Status == StatusComanda.Finalizat)">Finalizata</option>
+                            <option value="3" selected="@(item.Status == StatusComanda.Predat)">Predată</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-primary ms-1">Update</button>
+                    </form>
+                }
             </td>
         </tr>
 }
